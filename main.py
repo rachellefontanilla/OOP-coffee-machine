@@ -10,7 +10,7 @@ on = True
 
 while on:
     options = my_menu.get_items()
-    prompt = input(f"What would you like? ({options}) ")
+    prompt = input(f"What would you like? ({options}) ").lower()
     if prompt == "off":
         on = False
     elif prompt == "report":
