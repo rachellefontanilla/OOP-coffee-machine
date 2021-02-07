@@ -1,7 +1,5 @@
 class MoneyMachine:
 
-    CURRENCY = "$"
-
     COIN_VALUES = {
         "quarters": 0.25,
         "dimes": 0.10,
@@ -26,15 +24,21 @@ class MoneyMachine:
 
     def make_payment(self, cost):
         """Returns True when payment is accepted, or False if insufficient."""
+        print(f"That will be {self.format_money(cost)}.")
         self.process_coins()
         if self.money_received >= cost:
-            change = round(self.money_received - cost, 2)
-            print(f"Here is {self.CURRENCY}{change} in change.")
-            self.profit += cost
-            self.money_received = 0
+            if self.money_received > cost:
+                change = round(self.money_received - cost, 2)
+                print(f"Here is {self.format_money(change)} in change.")
+                self.profit += cost
+                self.money_received = 0
             return True
         else:
             print("Sorry that's not enough money. Money refunded.")
             self.money_received = 0
             return False
+    
+    def format_money(self, amount):
+        formatted_money = "${:,.2f}".format(amount)
+        return formatted_money
         
